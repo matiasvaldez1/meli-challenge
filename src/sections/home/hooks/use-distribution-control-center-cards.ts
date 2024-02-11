@@ -13,7 +13,7 @@ const useDistributionControlCenterCards = () => {
       try {
         setTimeout(() => {
           const response =
-            mockDistributionControlCenterCards; /* await apiCall() */
+            mockDistributionControlCenterCards; /* Idealmente: await apiCall() */
           setCards(response);
           setLoading(false);
         }, 1000);

@@ -11,7 +11,7 @@ Tanto el diseño de la interfaz de usuario como el user flow de este proyecto po
 El proyecto utiliza varios paquetes y bibliotecas para su funcionalidad detallados a continuacion:
 
 - **React Js**: La biblioteca de interfaces de usuario que nos da muchas facilidades para desarrollar una moderna web app.
-- **Shadcn/ui**: Paquete de componentes que nos permite instalar solamente los componentes que necesitemos, lo que nos por consecuencia ayuda a reducir el tamaño del bundle final al solamente instalar los componentes que instalemos de manera ondemand.
+- **Shadcn/ui**: Paquete de componentes que nos permite instalar solamente los componentes que necesitemos, lo que nos por consecuencia ayuda a reducir el tamaño del bundle final al solamente instalar los componentes que utilizaremos de manera ondemand.
 - **Tailwind Css**: Framework de css mobile first que nos proporciona utility classes y customizacion de theme que agiliza el desarrollo de componentes y su estilado. 
 - **React router dom**: Paquete utilizado para generar SPA routing a un proyecto con React, con muchas utilizades a la hora de definir los paths de nuestra aplicacion.
 - **Formik**: Paquete utilizado para la creacion de formularios, facilita mucho el código en la definicion de los tipos y validaciones de los mismos.
@@ -32,7 +32,7 @@ Para ejecutar este proyecto localmente, seguí estos pasos:
    ```
    npm install
    ```
-3. Corre el proyecto localmente utilizandoÑ
+3. Corre el proyecto localmente utilizando:
 
     ```
    npm run dev

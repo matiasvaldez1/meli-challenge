@@ -5,76 +5,28 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useFormik } from "formik";
-import {
-  supportedFileExtensions,
-  useFileExtensionValidator,
-  useFileSizeValidator,
-  useValidationSchema,
-} from "./hooks";
 import _ from "lodash";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
 import { useNavigate } from "react-router-dom";
 import { PATH_NAMES } from "@/router/paths";
+import useIncidentRegistrationForm from "./hooks/use-incident-registration-formik";
 
 const IncidentRegistrationForm = ({ onSubmit }: { onSubmit: () => void }) => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const f = useFormik({
-    initialValues: {
-      informantName: "",
-      incidentTitle: "",
-      incidentDescription: "",
-      incidentDistributionCenter: "",
-      evidenceUpload: "",
-      incidentDate: "",
-      incidentClosingDate: "",
-      incidentObservation: "",
-    },
-    validationSchema: useValidationSchema((yup, E) => ({
-      informantName: yup.string().required(E.REQUIRED),
-      incidentTitle: yup.string().required(E.REQUIRED),
-      incidentDescription: yup.string().required(E.REQUIRED),
-      incidentDistributionCenter: yup.string().required(E.REQUIRED),
-      evidenceUpload: yup
-        .mixed()
-        .test(
-          "supported",
-          `Tipo de archivo no soportado, utilizar extensiones ${supportedFileExtensions.join(
-            ", "
-          )}.`,
-          (evidenceUpload) => {
-            return (
-              !evidenceUpload ||
-              useFileExtensionValidator(evidenceUpload, supportedFileExtensions)
-            );
-          }
-        )
-        .test(
-          "dimensions",
-          `Tamaño máximo excedido. Hasta 10MB.`,
-          (evidenceUpload: any) => {
-            return !evidenceUpload || useFileSizeValidator(evidenceUpload, 10);
-          }
-        ),
-      incidentDate: yup.string().required(E.REQUIRED),
-      incidentClosingDate: yup.string(),
-      incidentObservation: yup.string(),
-    })),
-    onSubmit: onSubmit,
-  });
+  const form = useIncidentRegistrationForm(onSubmit);
 
   const handleSendRegister = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    const validateForm = await f.validateForm();
+    const validateForm = await form.validateForm();
     if (!_.isEmpty(validateForm)) {
-      f.setTouched(validateForm as any);
+      form.setTouched(validateForm as any);
       return;
     }
-    await f.submitForm();
+    await form.submitForm();
     toast({
       title: "Registro enviado.",
       description: "El registro ha sido enviado exitosamente.",
@@ -97,16 +49,16 @@ const IncidentRegistrationForm = ({ onSubmit }: { onSubmit: () => void }) => {
           Nombre del Informante
         </p>
         <Input
-          onChange={f.handleChange}
-          onBlur={f.handleBlur}
-          value={f.values.informantName}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          value={form.values.informantName}
           name="informantName"
           placeholder="John Doe"
           className="mt-2"
         />
-        {f.errors.informantName && f.touched.informantName && (
+        {form.errors.informantName && form.touched.informantName && (
           <div className="text-red-600 font-semibold mt-2">
-            {f.errors.informantName}
+            {form.errors.informantName}
           </div>
         )}
       </Label>
@@ -115,16 +67,16 @@ const IncidentRegistrationForm = ({ onSubmit }: { onSubmit: () => void }) => {
           Título del Incidente
         </p>
         <Input
-          onChange={f.handleChange}
-          onBlur={f.handleBlur}
-          value={f.values.incidentTitle}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          value={form.values.incidentTitle}
           name="incidentTitle"
           placeholder="Titulo del incidente"
           className="mt-2"
         />
-        {f.errors.incidentTitle && f.touched.incidentTitle && (
+        {form.errors.incidentTitle && form.touched.incidentTitle && (
           <div className="text-red-600 font-semibold mt-2">
-            {f.errors.incidentTitle}
+            {form.errors.incidentTitle}
           </div>
         )}
       </Label>
@@ -133,16 +85,16 @@ const IncidentRegistrationForm = ({ onSubmit }: { onSubmit: () => void }) => {
           Descripción del Incidente
         </p>
         <Textarea
-          onChange={f.handleChange}
-          onBlur={f.handleBlur}
-          value={f.values.incidentDescription}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          value={form.values.incidentDescription}
           name="incidentDescription"
           placeholder="El incidente comenzó cuando..."
           className="mt-2"
         />
-        {f.errors.incidentDescription && f.touched.incidentDescription && (
+        {form.errors.incidentDescription && form.touched.incidentDescription && (
           <div className="text-red-600 font-semibold mt-2">
-            {f.errors.incidentDescription}
+            {form.errors.incidentDescription}
           </div>
         )}
       </Label>
@@ -151,19 +103,19 @@ const IncidentRegistrationForm = ({ onSubmit }: { onSubmit: () => void }) => {
           Centro de Distribución del Incidente
         </p>
         <AutocompleteInput
-          onChange={f.handleChange}
-          onBlur={f.handleBlur}
-          value={f.values.incidentDistributionCenter}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          value={form.values.incidentDistributionCenter}
           name="incidentDistributionCenter"
           placeholder="Av Rivadavia 2000..."
           onSetLocation={(val) =>
-            f.setFieldValue("incidentDistributionCenter", val)
+            form.setFieldValue("incidentDistributionCenter", val)
           }
         />
-        {f.errors.incidentDistributionCenter &&
-          f.touched.incidentDistributionCenter && (
+        {form.errors.incidentDistributionCenter &&
+          form.touched.incidentDistributionCenter && (
             <div className="text-red-600 font-semibold mt-2">
-              {f.errors.incidentDistributionCenter}
+              {form.errors.incidentDistributionCenter}
             </div>
           )}
       </Label>
@@ -173,17 +125,17 @@ const IncidentRegistrationForm = ({ onSubmit }: { onSubmit: () => void }) => {
         </p>
         <Input
           onChange={(event) => {
-            f.setFieldValue("evidenceUpload", event.target.files?.[0]);
+            form.setFieldValue("evidenceUpload", event.target.files?.[0]);
           }}
-          onBlur={f.handleBlur}
-          value={(f.values.evidenceUpload as any)?.fileName}
+          onBlur={form.handleBlur}
+          value={(form.values.evidenceUpload as any)?.fileName}
           name="evidenceUpload"
           className="mt-2"
           type="file"
         />
-        {f.errors.evidenceUpload && f.touched.evidenceUpload && (
+        {form.errors.evidenceUpload && form.touched.evidenceUpload && (
           <div className="text-red-600 font-semibold mt-2">
-            {f.errors.evidenceUpload}
+            {form.errors.evidenceUpload as any}
           </div>
         )}
       </Label>
@@ -192,16 +144,16 @@ const IncidentRegistrationForm = ({ onSubmit }: { onSubmit: () => void }) => {
           Fecha del Incidente
         </p>
         <Input
-          onChange={f.handleChange}
-          onBlur={f.handleBlur}
-          value={f.values.incidentDate}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          value={form.values.incidentDate}
           name="incidentDate"
           className="mt-2"
-          type="datetime-local"
+          type="date"
         />
-        {f.errors.incidentDate && f.touched.incidentDate && (
+        {form.errors.incidentDate && form.touched.incidentDate && (
           <div className="text-red-600 font-semibold mt-2">
-            {f.errors.incidentDate}
+            {form.errors.incidentDate}
           </div>
         )}
       </Label>
@@ -210,16 +162,16 @@ const IncidentRegistrationForm = ({ onSubmit }: { onSubmit: () => void }) => {
           Fecha de cierre del incidente
         </p>
         <Input
-          onChange={f.handleChange}
-          onBlur={f.handleBlur}
-          value={f.values.incidentClosingDate}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          value={form.values.incidentClosingDate}
           name="incidentClosingDate"
           className="mt-2"
-          type="datetime-local"
+          type="date"
         />
-        {f.errors.incidentClosingDate && f.touched.incidentClosingDate && (
+        {form.errors.incidentClosingDate && form.touched.incidentClosingDate && (
           <div className="text-red-600 font-semibold mt-2">
-            {f.errors.incidentClosingDate}
+            {form.errors.incidentClosingDate}
           </div>
         )}
       </Label>
@@ -228,16 +180,16 @@ const IncidentRegistrationForm = ({ onSubmit }: { onSubmit: () => void }) => {
           Observación del incidente
         </p>
         <Textarea
-          onChange={f.handleChange}
-          onBlur={f.handleBlur}
-          value={f.values.incidentObservation}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          value={form.values.incidentObservation}
           name="incidentObservation"
           placeholder="El incidente se podria haber evitado con..."
           className="mt-2"
         />
-        {f.errors.incidentObservation && f.touched.incidentObservation && (
+        {form.errors.incidentObservation && form.touched.incidentObservation && (
           <div className="text-red-600 font-semibold mt-2">
-            {f.errors.incidentObservation}
+            {form.errors.incidentObservation}
           </div>
         )}
       </Label>
