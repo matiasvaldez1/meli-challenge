@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@types/google.maps": "^3.55.2",
+    "@types/lodash": "^4.14.202",
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
