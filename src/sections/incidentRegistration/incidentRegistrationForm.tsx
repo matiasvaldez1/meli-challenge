@@ -13,7 +13,7 @@ import {
   useValidationSchema,
 } from "./hooks";
 import _ from "lodash";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
 import { useNavigate } from "react-router-dom";
 import { PATH_NAMES } from "@/router/paths";

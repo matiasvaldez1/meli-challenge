@@ -16,7 +16,7 @@ El proyecto utiliza varios paquetes y bibliotecas para su funcionalidad detallad
 - **React router dom**: Paquete utilizado para generar SPA routing a un proyecto con React, con muchas utilizades a la hora de definir los paths de nuestra aplicacion.
 - **Formik**: Paquete utilizado para la creacion de formularios, facilita mucho el código en la definicion de los tipos y validaciones de los mismos.
 - **Yup**: Paquete utilizado para validaciones, en este caso del formulario principal de la aplicacion.
-- **Jest**: Unit testing de componentes.
+- **Vitest**: Unit testing de componentes de UI del formulario.
 
 ## Seguridad
 Con respecto a la seguridad, principalmente la relacionada a la subida de archivos, se limita el tamaño y la extension de los mismos para evitar cualquier tipo de ataque a traves de esta funcionalidad.
