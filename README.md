@@ -18,6 +18,13 @@ El proyecto utiliza varios paquetes y bibliotecas para su funcionalidad detallad
 - **Yup**: Paquete utilizado para validaciones, en este caso del formulario principal de la aplicacion.
 - **Vitest**: Unit testing de componentes de UI del formulario.
 
+## Unit tests
+Los tests se encuentran dentro de la carpeta "src/__tests__" y pueden ser corridos a traves del comando:
+
+   ```
+   npm run test
+   ```
+
 ## Seguridad
 Con respecto a la seguridad, principalmente la relacionada a la subida de archivos, se limita el tamaño y la extension de los mismos para evitar cualquier tipo de ataque a traves de esta funcionalidad.
 
