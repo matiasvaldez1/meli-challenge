@@ -1,31 +1,49 @@
-# React + TypeScript + Vite
+# README
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introducción
+Este proyecto es una aplicación para control de centros de distribucion, principalmente enfocada en el registro de incidentes. El proyecto cuenta con los paths principales de home (/) y registro de incidentes (/incident_registration). En el home o inicio podemos encontrar varias cards mockeadas siendo la de Registro de Incidentes la unica funcional, mientras que en la pagina de registro de incidentes podemos encontrar el formulario con los requerimientos funcionales.
+A su vez el proyecto es enteramente funcional en modo responsive, sea para mobile, tablet o desktop.
 
-Currently, two official plugins are available:
+## Diseño en Figma
+Tanto el diseño de la interfaz de usuario como el user flow de este proyecto podés encontrarlo haciendo clic en el siguiente enlace: [Enlace a Figma](https://www.figma.com/file/6GA481qUypo9a6gGd4YURS/Matias-Mercadolibre-Technical-Test?type=design&node-id=2%3A79&mode=design&t=yJVjF8T0PAvqjP5X-1)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Paquetes utilizados
+El proyecto utiliza varios paquetes y bibliotecas para su funcionalidad detallados a continuacion:
 
-## Expanding the ESLint configuration
+- **React Js**: La biblioteca de interfaces de usuario que nos da muchas facilidades para desarrollar una moderna web app.
+- **Shadcn/ui**: Paquete de componentes que nos permite instalar solamente los componentes que necesitemos, lo que nos por consecuencia ayuda a reducir el tamaño del bundle final al solamente instalar los componentes que instalemos de manera ondemand.
+- **Tailwind Css**: Framework de css mobile first que nos proporciona utility classes y customizacion de theme que agiliza el desarrollo de componentes y su estilado. 
+- **React router dom**: Paquete utilizado para generar SPA routing a un proyecto con React, con muchas utilizades a la hora de definir los paths de nuestra aplicacion.
+- **Formik**: Paquete utilizado para la creacion de formularios, facilita mucho el código en la definicion de los tipos y validaciones de los mismos.
+- **Yup**: Paquete utilizado para validaciones, en este caso del formulario principal de la aplicacion.
+- **Jest**: Unit testing de componentes.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Seguridad
+Con respecto a la seguridad, principalmente la relacionada a la subida de archivos, se limita el tamaño y la extension de los mismos para evitar cualquier tipo de ataque a traves de esta funcionalidad.
 
-- Configure the top-level `parserOptions` property like this:
+## Validaciones
+El formulario principal cuenta con validaciones a la hora de su envío en todos los inputs, sean requeridos o no.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Instalación
+Para ejecutar este proyecto localmente, seguí estos pasos:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-"# meli-challenge" 
+1. Cloná este repositorio en tu máquina local.
+2. Instala las dependencias utilizando el siguiente comando:
+   ```
+   npm install
+   ```
+3. Corre el proyecto localmente utilizandoÑ
+
+    ```
+   npm run dev
+    ```
+
+## Despliegue
+El proyecto se encuentra deployeado en Vercel, a dicho deploy se puede acceder a través del siguiente [link](https://meli-challenge-steel.vercel.app)
+
+## Licencia
+Este proyecto está bajo la [Licencia MIT](LICENSE).
+
+---
+
+¡Gracias por leer!
